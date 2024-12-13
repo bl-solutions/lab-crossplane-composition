@@ -1,0 +1,10 @@
+apiVersion: contoso.org/v1alpha1
+kind: AppClaim
+metadata:
+  name: whoami
+  namespace: whoami
+spec:
+  namespace: whoami
+#  name: whoami
+#  image: traefik/whoami:v1.10
+  replicas: 10

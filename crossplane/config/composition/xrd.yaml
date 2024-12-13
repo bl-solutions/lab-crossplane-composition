@@ -1,0 +1,43 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xapps.contoso.org  # Must match the plural name and group
+spec:
+  group: contoso.org
+
+  names:
+    kind: xApp
+    plural: xapps
+
+  claimNames:
+    kind: AppClaim
+    plural: appclaims
+
+  versions:
+    - name: v1alpha1
+      referenceable: true
+      served: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                namespace:
+                  type: string
+                  description: Namespace on Kubernetes cluster
+                name:
+                  type: string
+                  description: Region to deploy the application
+                  default: "whoami"
+                image:
+                  type: string
+                  description: Image of the application
+                  default: "traefik/whoami:v1.10"
+                replicas:
+                  type: integer
+                  description: Number of replicas of the application
+                  default: 1
+              required:
+                - namespace
